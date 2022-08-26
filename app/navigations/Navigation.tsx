@@ -7,6 +7,8 @@ import GameStack from "./GameStack";
 import PlayStack from "./PlayStack";
 import TournamentsStack from "./TournamentsStack";
 import UsersStack from "./UsersStack";
+import { useContext } from "react";
+import AuthContext from "@app/contexts/AuthContext";
 const Tab = createBottomTabNavigator();
 
 function NavigationsTabs() {
@@ -22,11 +24,11 @@ function NavigationsTabs() {
 }
 
 export default function Navigation() {
-  const user = false;
+  const { isAuth } = useContext(AuthContext);
   return (
     <SafeAreaProvider>
       <NavigationContainer>
-        {user ? <NavigationsTabs /> : <AuthStack />}
+        {isAuth ? <NavigationsTabs /> : <AuthStack />}
       </NavigationContainer>
     </SafeAreaProvider>
   );

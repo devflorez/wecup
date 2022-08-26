@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import Colors from "../../constants/Colors";
+import { Dimensions } from "react-native";
 export const LayoutStyles = StyleSheet.create({
   containerLayout: {
     flex: 1,
@@ -9,8 +10,8 @@ export const LayoutStyles = StyleSheet.create({
   },
   containerChildren:{
     backgroundColor: Colors.white,
-    width:"90%",
-    height:"86%",
+    width:Dimensions.get('window').width * 0.90,
+    minHeight : Dimensions.get('window').height* 0.85,
     borderRadius: 24,
     justifyContent: "center",
     alignItems: "center",
@@ -21,6 +22,13 @@ export const LayoutStyles = StyleSheet.create({
     },
     shadowOpacity:  0.23,
     shadowRadius: 11.78,
-    elevation: 15
+    elevation: 15,
+    marginVertical:20
+    
+   
+  },
+  containerSafeArea:{
+    flex: 1,
+    backgroundColor: Colors.primary,
   }
 });

@@ -1,10 +1,21 @@
-import { View, Text, TextInput } from "react-native";
+import { View,ScrollView, SafeAreaView } from "react-native";
 import React from "react";
 import { LayoutStyles } from "./LayoutAuthStyle";
-export default function LayoutAuth({ children }) {
+import { LayoutAuthPropsInterface } from "./LayoutAuthInterface";
+import Colors from "@app/constants/Colors";
+export default function LayoutAuth({
+  children,
+  style,
+}: LayoutAuthPropsInterface) {
+  const stylesChildren = {
+    ...LayoutStyles.containerChildren,
+    ...style,
+  };
   return (
-    <View style={LayoutStyles.containerLayout}>
-      <View style={LayoutStyles.containerChildren}>{children}</View>
-    </View>
+    <SafeAreaView style={LayoutStyles.containerSafeArea}>
+      <View style={LayoutStyles.containerLayout}>
+        <ScrollView contentContainerStyle={stylesChildren}>{children}</ScrollView>
+      </View>
+    </SafeAreaView>
   );
 }
