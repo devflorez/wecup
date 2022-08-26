@@ -8,6 +8,8 @@ export default function Input({
   onChange,
   placeholder,
   value,
+  isPassword,
+  defaultValue
 }: InputPropsInterface) {
   return (
     <View style={InputStyles.containerInput}>
@@ -16,6 +18,8 @@ export default function Input({
         onChangeText={onChange}
         placeholder={placeholder}
         value={value}
+        secureTextEntry={isPassword}
+        defaultValue={defaultValue}
       />
       {children}
     </View>

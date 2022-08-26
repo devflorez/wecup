@@ -1,5 +1,5 @@
 import { View, Text, Image, Platform } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import LayoutAuth from "@app/components/Layout/LayoutAuth";
 import Button from "@app/components/Button";
 import Colors from "@app/constants/Colors";
@@ -14,17 +14,32 @@ import ResultRegister from "@app/components/SignUp/ResultRegister";
 import useStep from "@app/hooks/useStep";
 import { useNavigation } from "@react-navigation/native";
 import useSignUp from "@app/hooks/useSignUp";
+import AuthContext from "@app/contexts/AuthContext";
 export const SignUpScreen = () => {
-  const { currentStep, nextCurrent, progress } = useStep();
-  const {} = useSignUp();
+  const {
+    phoneNumber,
+    codeCountry,
+    newUser,
+    register,
+    nextCurrent,
+    currentStep,
+    progress,
+    confirmUser,
+    result,
+  } = useContext(AuthContext);
+
   const Steps = {
     RegisterPhone: {
       component: <RegisterPhone />,
-      onPress: () => console.log("toco"),
+      onPress: () => nextCurrent("RegisterUser"),
+      disabled: phoneNumber.length === 0 || codeCountry.length === 0,
+      textButton: "CONTINUAR",
     },
     RegisterUser: {
       component: <RegisterUser />,
-      onPress: () => console.log("toco"),
+      onPress: () => register(),
+      disabled: newUser.username.length === 0 || newUser.password.length === 0,
+      textButton: "CREAR",
     },
     Result: {
       component: (
@@ -38,14 +53,16 @@ export const SignUpScreen = () => {
           />
         </Result>
       ),
-      onPress: () => console.log("toco"),
+      onPress: () => nextCurrent("VerifyCode"),
+      textButton: "COMPLETA PERFIL",
     },
     VerifyCode: {
       component: <VerifyCode />,
-      onPress: () => console.log("toco"),
+      onPress: () => confirmUser(),
+      textButton: "VERIFICAR",
     },
   };
-  const result = "initial";
+
   if (result === "success")
     return (
       <LayoutAuth style={SignUpStyles.containerSignUp}>
@@ -57,20 +74,21 @@ export const SignUpScreen = () => {
     <LayoutAuth style={SignUpStyles.containerSignUp}>
       <View style={SignUpStyles.containerSteps}>
         {Object.keys(Steps).map((key, index) => {
-          console.log(key);
+          let isActive = progress.find((step) => step == key);
           return (
             <StepIndicator
               key={key}
               step={index + 1}
-              active={index === 0 ? true : progress[key]}
+              active={isActive ? true : false}
             />
           );
         })}
       </View>
       {Steps[currentStep].component}
       <Button
-        onPress={() => console.log("presiono")}
-        text="CONTINUAR"
+        onPress={Steps[currentStep].onPress}
+        text={Steps[currentStep].textButton}
+        disabled={Steps[currentStep].disabled}
         backgroundColor={Colors.purple}
       />
     </LayoutAuth>

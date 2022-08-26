@@ -1,7 +1,9 @@
-import React from 'react'
-
+import React from "react";
+import { View, Text } from "react-native";
 export default function UsersStack() {
   return (
-    <>UsersStack</>
-  )
+    <View>
+      <Text>UserSatck</Text>
+    </View>
+  );
 }

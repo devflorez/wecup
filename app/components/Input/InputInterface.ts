@@ -4,4 +4,6 @@ export interface InputPropsInterface {
   onChange: (values: string) => void;
   placeholder?: string;
   value: string;
+  isPassword?: boolean;
+  defaultValue?: string;
 }

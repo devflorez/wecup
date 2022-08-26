@@ -1,7 +1,11 @@
 
-
+import { View,Text } from "react-native"
 export default function TournamentsStack() {
   return (
-    <>TournamentsStack</>
+    <View>
+      <Text>
+      PlayStack
+      </Text>
+    </View>
   )
 }

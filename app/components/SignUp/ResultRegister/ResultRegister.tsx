@@ -1,10 +1,12 @@
 import { View, Text, Image } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import Result from "@app/components/Result";
 import Button from "@app/components/Button";
 import Colors from "@app/constants/Colors";
 import { ResultRegisterStyles } from "./ResultRegisterStyles";
+import AuthContext from "@app/contexts/AuthContext";
 export default function ResultRegister() {
+  const {finishedSignUp} = useContext(AuthContext)
   return (
     <View style={ResultRegisterStyles.containerResultRegister}>
       <Text style={ResultRegisterStyles.restartRegisterText}>Volver a empezar</Text>
@@ -18,7 +20,7 @@ export default function ResultRegister() {
         />
       </Result>
       <Button
-        onPress={() => console.log("presiono")}
+        onPress={() => finishedSignUp()}
         text="CONTINUAR"
         backgroundColor={Colors.purple}
       />

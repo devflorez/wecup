@@ -2,7 +2,7 @@ import { CountryType } from "./../../types/countryType";
 export interface InputPhonePropsInterface {
   code: string;
   phone: string;
-  onChangeCode: (values: string, name:string) => void;
-  onChangeNumber: (values: string, name:string) => void;
+  onChangePhoneNumber: (values: string, name: string) => void;
+  onChangeCountry: (country: CountryType) => void;
   country: CountryType;
 }

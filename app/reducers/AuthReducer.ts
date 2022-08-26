@@ -6,6 +6,7 @@ export const initialStateAuth = {
     username: "",
   },
   isAuth: false,
+  result: "initial",
 };
 
 export function AuthReducer(state, action) {
@@ -18,7 +19,12 @@ export function AuthReducer(state, action) {
     case "SET_USER":
       return {
         ...state,
-        user: action.payload,
+        user: action.payload.user,
+        result: action.payload.result,
+      };
+    case "SET_AUTH":
+      return {
+        ...state,
         isAuth: action.payload,
       };
   }

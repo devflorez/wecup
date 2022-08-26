@@ -1,17 +1,14 @@
 import { View, Text } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Button from "@app/components/Button";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Colors from "@app/constants/Colors";
 import { VerifyCodeStyles } from "./VerifyCodeStyles";
 import InputCode from "./InputCode";
+import AuthContext from "@app/contexts/AuthContext";
 export default function VerifyCode() {
-  const [formData, setFormData] = useState({
-    code1: "",
-    code2: "",
-    code3: "",
-    code4: "",
-  });
+ 
+  const { newUser, resendConfirmation, codeConfirmation, onChangeFormCode } = useContext(AuthContext);
   return (
     <View style={VerifyCodeStyles.containerVerifyCode}>
       <MaterialCommunityIcons
@@ -20,24 +17,34 @@ export default function VerifyCode() {
         color={Colors.purple}
       />
       <View style={VerifyCodeStyles.containerInput}>
+   
+      <InputCode
+      value={codeConfirmation.cod1}
+      onChange={(values) => onChangeFormCode(values, "cod1")}
+    />
+   
+      
         <InputCode
-          value={formData.code1}
-          onChange={(values) => setFormData({ ...formData, code1: values })}
+          value={codeConfirmation.cod2}
+          onChange={(values) => onChangeFormCode(values, "cod2")}
         />
         <InputCode
-          value={formData.code2}
-          onChange={(values) => setFormData({ ...formData, code2: values })}
+          value={codeConfirmation.cod3}
+          onChange={(values) => onChangeFormCode(values, "cod3")}
         />
         <InputCode
-          value={formData.code3}
-          onChange={(values) => setFormData({ ...formData, code3: values })}
+          value={codeConfirmation.cod4}
+          onChange={(values) => onChangeFormCode(values, "cod4")}
         />
         <InputCode
-          value={formData.code4}
-          onChange={(values) => setFormData({ ...formData, code4: values })}
+          value={codeConfirmation.cod5}
+          onChange={(values) => onChangeFormCode(values, "cod5")}
+        />
+        <InputCode
+          value={codeConfirmation.cod6}
+          onChange={(values) => onChangeFormCode(values, "cod6")}
         />
       </View>
-
       <View>
         <Text style={VerifyCodeStyles.text}>¿No recibió el código?</Text>
         <Button
@@ -45,7 +52,7 @@ export default function VerifyCode() {
           textColor={Colors.grayDark}
           styleContainer={VerifyCodeStyles.buttonResend}
           text="REENVIAR"
-          onPress={() => console.log("dioClick")}
+          onPress={() => resendConfirmation()}
         />
       </View>
     </View>

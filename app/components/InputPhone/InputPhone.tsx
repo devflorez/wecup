@@ -7,18 +7,20 @@ import { InputPhonePropsInterface } from "./inputPhoneInterface";
 export default function InputPhone({
   code,
   phone,
-  onChangeCode,
-  onChangeNumber,
+  onChangePhoneNumber,
+  onChangeCountry,
   country,
 }: InputPhonePropsInterface) {
+  
   return (
     <View style={InputPhoneStyles.containerInputPhone}>
-      <SelectCountry country={country} />
+      <SelectCountry 
+      onChangePhoneNumber={onChangePhoneNumber}
+      country={country} onChangeCountry={onChangeCountry} />
       <PhoneNumber
         code={code}
         phone={phone}
-        onChangeCode={onChangeCode}
-        onChangeNumber={onChangeNumber}
+        onChangePhoneNumber={onChangePhoneNumber}
       />
     </View>
   );

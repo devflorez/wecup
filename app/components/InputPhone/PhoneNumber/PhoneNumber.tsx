@@ -4,14 +4,15 @@ import { InputPhoneNumberStyles } from "./PhoneNumberStyles";
 export default function PhoneNumber({
   code,
   phone,
-  onChangeNumber,
-  onChangeCode,
+  onChangePhoneNumber,
+
 }) {
+
   return (
     <View style={InputPhoneNumberStyles.containerInputPhone}>
       <TextInput
         value={code}
-        onChangeText={(values) => onChangeCode(values)}
+        onChangeText={(values) => onChangePhoneNumber(values, "code")}
         style={InputPhoneNumberStyles.InputCode}
         placeholder="+57"
       />
@@ -20,7 +21,7 @@ export default function PhoneNumber({
         style={InputPhoneNumberStyles.InputPhone}
         placeholder="310 123 4567"
         value={phone}
-        onChangeText={(values) => onChangeNumber(values)}
+        onChangeText={(values) => onChangePhoneNumber(values, "phone")}
       />
     </View>
   );
